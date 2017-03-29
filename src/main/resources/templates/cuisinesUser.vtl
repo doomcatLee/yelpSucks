@@ -1,7 +1,6 @@
 <!--index.vtl-->
 <h1>Yelp Sucks!</h1>
 <h3>Our crowd-sourced website for restaurants is way better!</h3>
-
 <h4>Cuisines:</h4><br>
 #if($cuisines)
   #foreach($cuisine in $cuisines)
@@ -10,12 +9,3 @@
 #else
   <p>No cuisines.</p>
 #end
-
-<a href="/cuisines/new"><button class="btn btn-primary">Add cuisine</button></a>
-
-<a href="/cuisines/delete"><button class="btn btn-primary">Delete cuisine</button></a>
-
-
-<!--index.vtl-->
-
-<a href="/form-login"><button type="button" name="button">Log in as Admin</button></a>
