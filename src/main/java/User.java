@@ -25,6 +25,14 @@ public class User{
     return id;
   }
 
+  public boolean pass(){
+    if ((username.equals("admin")) && (password.equals("admin"))){
+      return true;
+  }
+  else{
+    return false;
+  }
+}
 
   public void save(){
     try(Connection con = DB.sql2o.open()){

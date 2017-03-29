@@ -58,24 +58,36 @@ public class App {
 
     get("/cuisinesUser", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      String type = request.queryParams("type");
-      Cuisine newCuisine = new Cuisine(type);
-      model.put("cuisines", Cuisine.all());
       model.put("template", "templates/cuisinesUser.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
 
-    get("/form-login", (request, response) -> {
+    post("/cuisinesUser", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      String type = request.queryParams("type");
-      Cuisine newCuisine = new Cuisine(type);
+      String username = request.queryParams("username");
+      String password = request.queryParams("password");
+      User user = new User(username, password);
       model.put("cuisines", Cuisine.all());
-      model.put("template", "templates/form-login.vtl");
+      user.save();
+      if (user.pass()){
+        model.put("template", "templates/cuisinesUser.vtl");
+      }else{
+        model.put("template","error.vtl");
+      }
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/form-login", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String username = request.queryParams("username");
+      String password = request.queryParams("password");
 
+      User user = new User(username, password);
+      user.save();
+      model.put("template", "templates/form-login.vtl");
 
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
