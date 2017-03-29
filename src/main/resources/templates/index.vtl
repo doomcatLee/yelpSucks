@@ -1,3 +1,15 @@
 <!--index.vtl-->
+<h1>Yelp Sucks!</h1>
+<h3>Our crowd-sourced website for restaurants is way better!</h3>
 
+<h4>Cuisines:</h4><br>
+#if($cuisines)
+  #foreach($cuisine in $cuisines)
+    <p><a href="/cuisines/$cuisine.getId()">$cuisine.getType()</a></p><br>
+  #end
+#else
+  <p>No cuisines.</p>
+#end
+
+<a href="/cuisines/new"><button name="btn btn-primary">Add cuisine</button></a>
 <!--index.vtl-->

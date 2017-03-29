@@ -11,6 +11,29 @@ public class App {
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String type = request.queryParams("type");
+      Cuisine newCuisine = new Cuisine(type);
+      newCuisine.save();
+      model.put("cuisines", Cuisine.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/cuisines/new", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/cuisines-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/cuisines/:cuisineId", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
